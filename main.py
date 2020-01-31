@@ -32,6 +32,9 @@ def getmenus():
 
     content = request.get_json()
 
+    if content is None:
+        return JSONResponse(BadRequest)
+
     if len(content) == 2 and "year" in content and "month" in content and not request.headers.get("Authorization") is None:
         try:
             authorization_token = request.headers.get(
@@ -52,6 +55,9 @@ def getmenus():
 def getcheckouts():
 
     content = request.get_json()
+
+    if content is None:
+        return JSONResponse(BadRequest)
 
     if len(content) == 2 and "year" in content and "month" in content and not request.headers.get("Authorization") is None:
         try:
@@ -74,6 +80,9 @@ def setmenus():
 
     content = request.get_json()
 
+    if content is None:
+        return JSONResponse(BadRequest)
+
     if len(content) == 1 and "choices" in content and not request.headers.get("Authorization") is None:
         try:
             authorization_token = request.headers.get(
@@ -95,6 +104,9 @@ def setmenus():
 def setcheckouts():
 
     content = request.get_json()
+
+    if content is None:
+        return JSONResponse(BadRequest)
 
     if len(content) == 1 and "checkouts" in content and not request.headers.get("Authorization") is None:
         try:
