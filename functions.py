@@ -54,6 +54,4 @@ def Get_RVT_Oseba(input_forms, action):
 
 
 def JSONResponse(input_dict):
-    resp = Response(json.dumps(input_dict), status=input_dict["status_code"], mimetype="application/json")
-    resp.headers["Access-Control-Allow-Origin"] = "*"
-    return resp
+    return Response(json.dumps(input_dict), status=input_dict["status_code"], mimetype="application/json")
