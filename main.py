@@ -2,6 +2,7 @@ import json
 import os
 
 from flask import Flask, redirect, request
+from flask_cors import CORS, cross_origin
 from user_agents import parse
 
 import api_lib
@@ -9,9 +10,11 @@ from functions import About, BadRequest, JSONResponse
 from helpers import GetCoffee, HTMLGetCoffee, ImATeapot
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/gettoken", methods=["POST"])
+@cross_origin()
 def gettoken():
 
     content = request.get_json()
@@ -28,6 +31,7 @@ def gettoken():
 
 
 @app.route("/getmenus", methods=["POST"])
+@cross_origin()
 def getmenus():
 
     content = request.get_json()
@@ -52,6 +56,7 @@ def getmenus():
 
 
 @app.route("/getcheckouts", methods=["POST"])
+@cross_origin()
 def getcheckouts():
 
     content = request.get_json()
@@ -76,6 +81,7 @@ def getcheckouts():
 
 
 @app.route("/setmenus", methods=["POST"])
+@cross_origin()
 def setmenus():
 
     content = request.get_json()
@@ -101,6 +107,7 @@ def setmenus():
 
 
 @app.route("/setcheckouts", methods=["POST"])
+@cross_origin()
 def setcheckouts():
 
     content = request.get_json()
@@ -126,6 +133,7 @@ def setcheckouts():
 
 
 @app.route("/about", methods=["GET"])
+@cross_origin()
 def version():
     return JSONResponse(About())
 
@@ -136,11 +144,13 @@ def root():
 
 
 @app.errorhandler(404)
+@cross_origin()
 def handler(e):
     return JSONResponse({"error": True, "status_code": 404, "message": "Not found"})
 
 
 @app.route("/coffeepot", methods=["GET"])
+@cross_origin()
 def getcoffee():
     parsed_ua = parse(request.headers.get("User-Agent"))
     if parsed_ua.is_pc or parsed_ua.is_tablet or parsed_ua.is_mobile:
@@ -150,6 +160,7 @@ def getcoffee():
 
 
 @app.route("/teapot")
+@cross_origin()
 def teapot():
     return JSONResponse(ImATeapot)
 
