@@ -17,7 +17,7 @@ def About():
     info["source"] = "https://github.com/rstular/lopolis-api"
     info["bug_reports"] = "https://github.com/rstular/lopolis-api/issues"
     info["changelog"] = "https://github.com/rstular/lopolis-api/blob/master/CHANGELOG.md"
-    info["version"] = "1.0.9"
+    info["version"] = "1.1.0"
     return info
 
 
@@ -54,4 +54,6 @@ def Get_RVT_Oseba(input_forms, action):
 
 
 def JSONResponse(input_dict):
-    return Response(json.dumps(input_dict), status=input_dict["status_code"], mimetype="application/json")
+    resp = Response(json.dumps(input_dict), status=input_dict["status_code"], mimetype="application/json")
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    return resp
