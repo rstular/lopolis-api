@@ -1,5 +1,0 @@
-language: python
-sudo: false
-python:
-    - 3.6
-script: echo "0"
