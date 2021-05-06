@@ -16,7 +16,9 @@ def About():
     info["license"] = "https://github.com/rstular/lopolis-api/blob/master/LICENSE"
     info["source"] = "https://github.com/rstular/lopolis-api"
     info["bug_reports"] = "https://github.com/rstular/lopolis-api/issues"
-    info["changelog"] = "https://github.com/rstular/lopolis-api/blob/master/CHANGELOG.md"
+    info[
+        "changelog"
+    ] = "https://github.com/rstular/lopolis-api/blob/master/CHANGELOG.md"
     info["version"] = "1.1.0"
     return info
 
@@ -30,7 +32,11 @@ def OtherError(status_code):
 
 
 def Success(data=None):
-    return {"error": False, "status_code": 200} if data is None else {"error": False, "status_code": 200, "data": data}
+    return (
+        {"error": False, "status_code": 200}
+        if data is None
+        else {"error": False, "status_code": 200, "data": data}
+    )
 
 
 def Get_RVT_Oseba(input_forms, action):
@@ -54,4 +60,8 @@ def Get_RVT_Oseba(input_forms, action):
 
 
 def JSONResponse(input_dict):
-    return Response(json.dumps(input_dict), status=input_dict["status_code"], mimetype="application/json")
+    return Response(
+        json.dumps(input_dict),
+        status=input_dict["status_code"],
+        mimetype="application/json",
+    )

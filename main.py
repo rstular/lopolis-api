@@ -23,8 +23,7 @@ def gettoken():
         return JSONResponse(BadRequest)
 
     if len(content) == 2 and "username" in content and "password" in content:
-        login_result = api_lib.GetToken(
-            content["username"], content["password"])
+        login_result = api_lib.GetToken(content["username"], content["password"])
         return JSONResponse(login_result)
     else:
         return JSONResponse(BadRequest)
@@ -39,17 +38,24 @@ def getmenus():
     if content is None:
         return JSONResponse(BadRequest)
 
-    if len(content) == 2 and "year" in content and "month" in content and not request.headers.get("Authorization") is None:
+    if (
+        len(content) == 2
+        and "year" in content
+        and "month" in content
+        and not request.headers.get("Authorization") is None
+    ):
         try:
-            authorization_token = request.headers.get(
-                "Authorization").split("Bearer ")[1]
+            authorization_token = request.headers.get("Authorization").split("Bearer ")[
+                1
+            ]
             if len(authorization_token) != 288:
                 raise ValueError("Token not the right length")
         except:
             return JSONResponse(BadRequest)
 
         menus_result = api_lib.GetMenus(
-            authorization_token, content["year"], content["month"])
+            authorization_token, content["year"], content["month"]
+        )
         return JSONResponse(menus_result)
     else:
         return JSONResponse(BadRequest)
@@ -64,17 +70,24 @@ def getcheckouts():
     if content is None:
         return JSONResponse(BadRequest)
 
-    if len(content) == 2 and "year" in content and "month" in content and not request.headers.get("Authorization") is None:
+    if (
+        len(content) == 2
+        and "year" in content
+        and "month" in content
+        and not request.headers.get("Authorization") is None
+    ):
         try:
-            authorization_token = request.headers.get(
-                "Authorization").split("Bearer ")[1]
+            authorization_token = request.headers.get("Authorization").split("Bearer ")[
+                1
+            ]
             if len(authorization_token) != 288:
-                raise ValueError("Token not the right length")
+                raise ValueError("Invalid token length")
         except:
             return JSONResponse(BadRequest)
 
         checkouts_result = api_lib.GetCheckouts(
-            authorization_token, content["year"], content["month"])
+            authorization_token, content["year"], content["month"]
+        )
         return JSONResponse(checkouts_result)
     else:
         return JSONResponse(BadRequest)
@@ -89,17 +102,21 @@ def setmenus():
     if content is None:
         return JSONResponse(BadRequest)
 
-    if len(content) == 1 and "choices" in content and not request.headers.get("Authorization") is None:
+    if (
+        len(content) == 1
+        and "choices" in content
+        and not request.headers.get("Authorization") is None
+    ):
         try:
-            authorization_token = request.headers.get(
-                "Authorization").split("Bearer ")[1]
+            authorization_token = request.headers.get("Authorization").split("Bearer ")[
+                1
+            ]
             if len(authorization_token) != 288:
-                raise ValueError("Token not the right length")
+                raise ValueError("Invalid token length")
         except:
             return JSONResponse(BadRequest)
 
-        menus_result = api_lib.SetMenus(
-            authorization_token, content["choices"])
+        menus_result = api_lib.SetMenus(authorization_token, content["choices"])
         return JSONResponse(menus_result)
 
     else:
@@ -115,17 +132,23 @@ def setcheckouts():
     if content is None:
         return JSONResponse(BadRequest)
 
-    if len(content) == 1 and "checkouts" in content and not request.headers.get("Authorization") is None:
+    if (
+        len(content) == 1
+        and "checkouts" in content
+        and not request.headers.get("Authorization") is None
+    ):
         try:
-            authorization_token = request.headers.get(
-                "Authorization").split("Bearer ")[1]
+            authorization_token = request.headers.get("Authorization").split("Bearer ")[
+                1
+            ]
             if len(authorization_token) != 288:
-                raise ValueError("Token not the right length")
+                raise ValueError("Invalid token length")
         except:
             return JSONResponse(BadRequest)
 
         checkouts_result = api_lib.SetCheckouts(
-            authorization_token, content["checkouts"])
+            authorization_token, content["checkouts"]
+        )
         return JSONResponse(checkouts_result)
 
     else:
